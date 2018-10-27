@@ -1,0 +1,48 @@
+{
+  "name": "ignite-txo-package-boilerplate",
+  "version": "3.0.0",
+  "description": "Technology Studio's boilerplate for public node packages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/technology-studio/ignite-txo-package-boilerplate.git"
+  },
+  "homepage": "https://github.com/technology-studio/ignite-txo-package-boilerplate",
+  "author": {
+    "name": "Technology Studio",
+    "email": "contact@technologystudio.sk",
+    "url": "https://github.com/technology-studio"
+  },
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "lint": "standard",
+    "test": "jest",
+    "watch": "jest --runInBand --watch",
+    "coverage": "jest --runInBand --coverage",
+    "shipit": "np"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "__DEV__",
+      "jasmine",
+      "beforeAll",
+      "afterAll",
+      "test",
+      "expect",
+      "describe"
+    ]
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "fs-jetpack": "^1.0.0",
+    "jest": "^20.0.4",
+    "np": "^2.15.0",
+    "sinon": "^2.3.1",
+    "standard": "^10.0.2",
+    "tempy": "^0.1.0"
+  },
+  "dependencies": {
+    "ramda": "^0.23.0"
+  }
+}
