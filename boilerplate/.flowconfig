@@ -7,8 +7,8 @@
 
 ; Ignore unexpected extra "@providesModule"
 .*/node_modules/.*/node_modules/fbjs/.*
-<PROJECT_ROOT>/node_modules/ts-.*/node_modules/.*
-<PROJECT_ROOT>/node_modules/\([^t]\|t\([^s]\|s\([^x]\|x\([^-]\|$\)\|$\)\|$\)\|$\).*$
+<PROJECT_ROOT>/node_modules/@txo.*/node_modules/.*
+<PROJECT_ROOT>/node_modules/\([^@]\|@\([^t]\|t\([^x]\|x\([^o]\|$\)\|$\)\|$\)\|$\).*$
 
 ; Ignore duplicate module providers
 ; For RN Apps installed via npm, "Libraries" folder is inside
@@ -22,15 +22,11 @@
 .*/node_modules/metro/.*
 
 ; Project based
-<PROJECT_ROOT>/ignite/.*
-<PROJECT_ROOT>/Tests/.*
+<PROJECT_ROOT>/__tests__/.*
 
 [include]
 
 [libs]
-node_modules/react-native/Libraries/react-native/react-native-interface.js
-node_modules/react-native/flow/
-node_modules/react-native/flow-github/
 flow-typed
 
 [options]
@@ -65,4 +61,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 [version]
-^0.80.0
+^0.86.0

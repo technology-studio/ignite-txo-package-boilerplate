@@ -125,7 +125,7 @@ async function install (context) {
     // initial git
     const spinner = print.spin('configuring git')
 
-    const huskyCmd = `&& node node_modules/husky/bin/install .`
+    const huskyCmd = `&& node node_modules/husky/husky install .`
     await system.run(`git init . && git add . && git commit -m "Initial commit." ${huskyCmd}`)
 
     spinner.succeed(`configured git`)

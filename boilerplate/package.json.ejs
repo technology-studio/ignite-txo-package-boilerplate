@@ -1,16 +1,16 @@
 {
-  "name": "<%= props.packageName %>",
+  "name": "@<%= props.organization %>/<%= props.packageName %>",
   "version": "1.0.0",
   "description": "Technology Studio - <%= props.fullname %>",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:technology-studio/<%= props.packageName %>.git"
+    "url": "https://github.com/technology-studio/<%= props.packageName %>.git"
   },
   "author": {
     "name": "Technology Studio",
     "email": "npm@technologystudio.sk",
-    "url": "https://bitbucket.org/technology-studio/"
+    "url": "https://github.com/technology-studio/"
   },
   "license": "MIT",
   "private": true,
@@ -24,33 +24,37 @@
     "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | eslint --cache --format=node_modules/eslint-formatter-pretty",
     "lint": "eslint --format=node_modules/eslint-formatter-pretty .",
     "fixcode": "eslint --format=node_modules/eslint-formatter-pretty . --fix",
-    "precommit": "yarn run git-hook",
-    "prepush": "yarn run git-hook",
     "git-hook": "yarn -s lint"
   },
-  "dependencies": {
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run git-hook",
+      "pre-push": "yarn run git-hook"
+    }
   },
+  "dependencies": {},
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.3",
-    "babel-plugin-syntax-trailing-function-commas": "^6.22.0",
-    "babel-preset-react-native": "^4.0.0",
+    "@babel/core": "^7.0.0",
+    "@txo/babel-preset": "^1.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
     "enzyme": "^3.5.1",
     "enzyme-adapter-react-16": "^1.4.0",
-    "eslint": "^4.19.1",
-    "eslint-config-txo-react": "^1.1.0",
+    "eslint": "^5.8.0",
+    "eslint-config-txo-react": "^2.0.0",
     "eslint-formatter-pretty": "^1.3.0",
-    "eslint-plugin-flowtype": "^2.49.3",
+    "eslint-plugin-flowtype": "^3.2.0",
     "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-jest": "^21.18.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-jest": "^22.0.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.10.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "flow-bin": "^0.80.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "flow-bin": "^0.86.0",
     "flow-typed": "^2.5.0",
     "glow": "technology-studio-forks/glow#fix/flow-version-boundaries",
-    "husky": "^0.14.3",
+    "husky": "^1.1.3",
     "jest": "^23.4.1",
     "react": "16.0.0",
     "react-dom": "16.0.0"
@@ -60,7 +64,7 @@
       "__DEV__": false
     },
     "testMatch": [
-      "<rootDir>/Tests/**/*.js",
+      "<rootDir>/__tests__/**/*.js",
       "**/?(*.)(spec|test).js?(x)"
     ],
     "transformIgnorePatterns": [
@@ -68,10 +72,10 @@
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "<rootDir>/Tests/Setup.js"
+      "<rootDir>/__tests__/Setup.js"
     ],
     "setupFiles": [
-      "<rootDir>/Tests/Setup"
+      "<rootDir>/__tests__/Setup"
     ]
   }
 }

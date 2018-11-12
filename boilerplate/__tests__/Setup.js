@@ -15,6 +15,6 @@ configure({ adapter: new Adapter() })
 
 // Mock your external modules here if needed
 // jest
-// .mock('react-native-device-info', () => {
+// .mock('package', () => {
 //   return { isTablet: jest.fn(() => { return false }) }
 // })
