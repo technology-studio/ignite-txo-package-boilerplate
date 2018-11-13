@@ -91,6 +91,7 @@ async function install (context) {
   const templates = [
     { template: 'lib/.npmignore.ejs', target: 'lib/.npmignore' },
     { template: 'lib/package.json.ejs', target: 'lib/package.json' },
+    { template: 'lib/index.d.ts.ejs', target: 'lib/index.d.ts' },
     { template: '.gitignore.ejs', target: '.gitignore' },
     { template: 'package.json.ejs', target: 'package.json' },
     { template: 'README.md.ejs', target: 'README.md' }
