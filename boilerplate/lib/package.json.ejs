@@ -6,17 +6,23 @@
   "typings": "index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/technology-studio/<%= props.packageName %>.git"
+    "url": "<%= props.repository %><%= props.packageName %>.git"
   },
   "author": {
     "name": "Technology Studio",
     "email": "npm@technologystudio.sk",
-    "url": "https://github.com/technology-studio/"
+    "url": "<%= props.repository %>"
   },
-  "license": "MIT",
-  "private": false,
+  "license": "<%= props.license %>",
+  "private": false,<% if (props.registry && props.access === 'private') { %>
+  "publishConfig": {
+    "registry": "<%= props.registry %>"
+  },
   "scripts": {
-  },
+    "republish": "npm unpublish $(cat package.json | jq -r '.name')@$(cat package.json | jq -r '.version') && yarn publish --new-version $(cat package.json | jq -r '.version')"
+  },<% } else { %>
+  "scripts": {
+  },<% } %>
   "dependencies": {
   },
   "peerDependencies": {

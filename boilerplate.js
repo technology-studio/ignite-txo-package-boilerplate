@@ -58,10 +58,9 @@ async function install (context) {
   var packageName = kebabCase(name)
   const fullname = upperFirst(packageName.replace(/-/g, ' '))
 
-
   const perfStart = (new Date()).getTime()
 
-  // HACK:  we need to simulate reac-native init, to prevent ignite cleanup our files
+  // HACK:  we need to simulate react-native init, to prevent ignite cleanup our files
   filesystem.dir(name)
   process.chdir(name)
   // end of HACK
@@ -73,8 +72,27 @@ async function install (context) {
     .spin(`using the ${gray(bold('TECHNOLOGY STUDIO'))} public package boilerplate v${boilerplateVersion}`)
     .succeed()
 
-  const { organization } = await prompt.ask(options.questions)
+  const questions = options.questions.filter(({ name }) => !parameters.options[name] )
 
+  const questionAnswers = await prompt.ask(questions)
+
+  const answers = {
+    ...parameters.options,
+    ...questionAnswers
+  }
+
+  const registry = answers.access === 'private' && !parameters.options.registry
+    ? await prompt.ask(options.registryQuestion)
+    : parameters.options.registry
+
+
+  const templateProps = {
+    fullname,
+    packageName,
+    license: answers.access === 'public' ? 'MIT': 'UNLICENSED',
+    registry,
+    ...answers
+  }
 
   spinner.text = '▸ copying files'
   spinner.start()
@@ -89,6 +107,7 @@ async function install (context) {
   spinner.text = '▸ generating files'
   spinner.start()
   const templates = [
+    { template: '__tests__/Setup.js.ejs', target: '__tests__/Setup.js' },
     { template: 'lib/.npmignore.ejs', target: 'lib/.npmignore' },
     { template: 'lib/package.json.ejs', target: 'lib/package.json' },
     { template: 'lib/index.d.ts.ejs', target: 'lib/index.d.ts' },
@@ -96,12 +115,6 @@ async function install (context) {
     { template: 'package.json.ejs', target: 'package.json' },
     { template: 'README.md.ejs', target: 'README.md' }
   ]
-
-  const templateProps = {
-    fullname,
-    packageName,
-    organization
-  }
 
   await ignite.copyBatch(context, templates, templateProps, {
     quiet: true,
