@@ -41,8 +41,8 @@
     "babel-jest": "^23.6.0",<% if (props.react) { %>
     "enzyme": "^3.5.1",
     "enzyme-adapter-react-16": "^1.4.0",
-    "react": "16.0.0",
-    "react-dom": "16.0.0",<% } %>
+    "react": "16.6.3",
+    "react-dom": "16.6.3",<% } %>
     "eslint": "^5.11.1",
     "eslint-config-txo-react": "^2.0.0",
     "eslint-formatter-pretty": "^2.0.0",
@@ -72,7 +72,8 @@
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "<rootDir>/__tests__/Setup.js"
+      "<rootDir>/__tests__/Setup.js",
+      "<rootDir>/__tests__/Utils/"
     ],
     "setupFiles": [
       "<rootDir>/__tests__/Setup"
