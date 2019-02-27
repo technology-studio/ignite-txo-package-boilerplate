@@ -108,9 +108,6 @@ async function install (context) {
   spinner.start()
   const templates = [
     { template: '__tests__/Setup.js.ejs', target: '__tests__/Setup.js' },
-    { template: 'lib/.npmignore.ejs', target: 'lib/.npmignore' },
-    { template: 'lib/package.json.ejs', target: 'lib/package.json' },
-    { template: 'lib/index.d.ts.ejs', target: 'lib/index.d.ts' },
     { template: '.gitignore.ejs', target: '.gitignore' },
     { template: 'package.json.ejs', target: 'package.json' },
     { template: 'README.md.ejs', target: 'README.md' }
@@ -120,6 +117,24 @@ async function install (context) {
     quiet: true,
     directory: `${ignite.ignitePluginPath()}/boilerplate`
   })
+
+  const ignitePackage = async(organization) => {
+    const packageTemplates = [
+      { template: 'packages/.npmignore.ejs', target: `packages/@${organization}/.npmignore` },
+      { template: 'packages/package.json.ejs', target: `packages/@${organization}/package.json` },
+      { template: 'packages/index.d.ts.ejs', target: `packages/@${organization}/index.d.ts` },
+    ]
+    await ignite.copyBatch(context, packageTemplates, {
+      ...templateProps,
+      organization,
+    }, {
+      quiet: true,
+      directory: `${ignite.ignitePluginPath()}/boilerplate`
+    })
+  }
+
+  await ignitePackage('txo')
+  await ignitePackage('txo-peer-dep')
 
   spinner.stop()
   spinner.succeed(`files generated`)

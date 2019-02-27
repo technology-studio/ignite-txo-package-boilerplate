@@ -3,12 +3,6 @@
  */
 const questions = [
   {
-    name: 'organization',
-    message: 'What kind of package are you going to generate? (organization)',
-    type: 'list',
-    choices: ['txo', 'txo-peer-dep']
-  },
-  {
     name: 'access',
     message: 'How should a package be published? (access)',
     type: 'list',

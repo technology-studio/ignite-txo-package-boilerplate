@@ -6,6 +6,7 @@
 
 ; Ignore unexpected extra "@providesModule"
 .*/node_modules/.*/node_modules/fbjs/.*
+<PROJECT_ROOT>/packages/.*/node_modules/.*
 <PROJECT_ROOT>/node_modules/@txo.*/node_modules/.*
 <PROJECT_ROOT>/node_modules/\([^@]\|@\([^t]\|t\([^x]\|x\([^o]\|$\)\|$\)\|$\)\|$\).*$
 

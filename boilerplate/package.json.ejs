@@ -1,8 +1,5 @@
 {
-  "name": "@<%= props.organization %>/<%= props.packageName %>",
-  "version": "1.0.0",
   "description": "Technology Studio - <%= props.fullname %>",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "<%= props.repository %><%= props.packageName %>.git"
@@ -24,8 +21,12 @@
     "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | eslint --cache --format=node_modules/eslint-formatter-pretty",
     "lint": "eslint --format=node_modules/eslint-formatter-pretty .",
     "fixcode": "eslint --format=node_modules/eslint-formatter-pretty . --fix",
-    "git-hook": "yarn -s lint"
+    "git-hook": "yarn -s lint && yarn flow check"
   },
+  "workspaces": [
+    "packages/@txo/*",
+    "packages/@txo-peer-dep/*"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "yarn run git-hook",
@@ -34,7 +35,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.2.2",
+    "@babel/core": "^7.3.3",
     "@txo/babel-preset": "^1.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
@@ -66,9 +67,6 @@
     ],
     "transformIgnorePatterns": [
       "/node_modules/(?!@txo).+\\.js$"
-    ],
-    "modulePathIgnorePatterns": [
-      "lib"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",
