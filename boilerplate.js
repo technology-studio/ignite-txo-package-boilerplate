@@ -120,9 +120,9 @@ async function install (context) {
 
   const ignitePackage = async(organization) => {
     const packageTemplates = [
-      { template: 'packages/.npmignore.ejs', target: `packages/@${organization}/.npmignore` },
-      { template: 'packages/package.json.ejs', target: `packages/@${organization}/package.json` },
-      { template: 'packages/index.d.ts.ejs', target: `packages/@${organization}/index.d.ts` },
+      { template: 'packages/.npmignore.ejs', target: `packages/@${organization}/${packageName}/.npmignore` },
+      { template: 'packages/package.json.ejs', target: `packages/@${organization}/${packageName}/package.json` },
+      { template: 'packages/index.d.ts.ejs', target: `packages/@${organization}/${packageName}/index.d.ts` },
     ]
     await ignite.copyBatch(context, packageTemplates, {
       ...templateProps,
