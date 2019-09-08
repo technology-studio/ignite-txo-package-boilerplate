@@ -123,6 +123,7 @@ async function install (context) {
       { template: 'packages/.npmignore.ejs', target: `packages/@${organization}/${packageName}/.npmignore` },
       { template: 'packages/package.json.ejs', target: `packages/@${organization}/${packageName}/package.json` },
       { template: 'packages/index.d.ts.ejs', target: `packages/@${organization}/${packageName}/index.d.ts` },
+      { template: 'packages/babel.config.js.ejs', target: `packages/@${organization}/${packageName}/babel.config.js` },
     ]
     await ignite.copyBatch(context, packageTemplates, {
       ...templateProps,

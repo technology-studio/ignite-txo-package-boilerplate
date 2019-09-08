@@ -2,7 +2,7 @@
   "name": "@<%= props.organization %>/<%= props.packageName %>",
   "version": "1.0.0",
   "description": "Technology Studio - <%= props.fullname %>",
-  "main": "index.js",
+  "main": "lib/index.js",
   "typings": "index.d.ts",
   "repository": {
     "type": "git",
@@ -17,12 +17,15 @@
   "private": false,<% if (props.registry && props.access === 'private') { %>
   "publishConfig": {
     "registry": "<%= props.registry %>"
-  },
-  "scripts": {
-    "republish": "npm unpublish $(cat package.json | jq -r '.name')@$(cat package.json | jq -r '.version') && yarn publish --new-version $(cat package.json | jq -r '.version')"
-  },<% } else { %>
-  "scripts": {
   },<% } %>
+  "scripts": {<% if (props.registry && props.access === 'private') { %>
+    "republish": "npm unpublish $(cat package.json | jq -r '.name')@$(cat package.json | jq -r '.version') && yarn publish --new-version $(cat package.json | jq -r '.version')",<% } %>
+    "build": "yarn build:clean && yarn build:lib && yarn build:flow",
+    "build:clean": "yarn rimraf lib",
+    "build:lib": "yarn babel src --out-dir lib --ignore **/__tests__/**",
+    "build:flow": "yarn flow-copy-source -i '**/__tests__/**' src lib",
+    "prepare": "yarn build"
+  }
   "dependencies": {
   },
   "peerDependencies": {
