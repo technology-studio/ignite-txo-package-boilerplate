@@ -119,11 +119,11 @@ async function install (context) {
   })
 
   const ignitePackage = async(organization) => {
+    const packageRelativePath = `packages/@${organization}/${packageName}`
     const packageTemplates = [
-      { template: 'packages/.npmignore.ejs', target: `packages/@${organization}/${packageName}/.npmignore` },
-      { template: 'packages/package.json.ejs', target: `packages/@${organization}/${packageName}/package.json` },
-      { template: 'packages/index.d.ts.ejs', target: `packages/@${organization}/${packageName}/index.d.ts` },
-      { template: 'packages/babel.config.js.ejs', target: `packages/@${organization}/${packageName}/babel.config.js` },
+      { template: 'packages/.npmignore.ejs', target: `${packageRelativePath}/.npmignore` },
+      { template: 'packages/package.json.ejs', target: `${packageRelativePath}/package.json` },
+      { template: 'packages/index.d.ts.ejs', target: `${packageRelativePath}/index.d.ts` },
     ]
     await ignite.copyBatch(context, packageTemplates, {
       ...templateProps,
@@ -132,6 +132,7 @@ async function install (context) {
       quiet: true,
       directory: `${ignite.ignitePluginPath()}/boilerplate`
     })
+    await system.run(`cd ${packageRelativePath} && ln -s ../../../babel.config.js`)
   }
 
   await ignitePackage('txo')
