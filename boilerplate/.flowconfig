@@ -26,6 +26,9 @@
 ; Project based
 <PROJECT_ROOT>/__tests__/.*
 
+[declarations]
+<PROJECT_ROOT>/node_modules/@txo.*
+
 [include]
 
 [libs]
