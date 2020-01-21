@@ -13,12 +13,9 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
-    "newclear": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build && rm -rf node_modules/ && npm cache clean --force && npm i",
-    "test:watch": "jest --watch",
-    "updateSnapshot": "jest --updateSnapshot",
+    "test:watch": "concurrently \"yarn workspaces run build:watch\" \"jest --watch\"",
+    "pretest": "yarn workspaces run build",
     "coverage": "jest --coverage && open coverage/lcov-report/index.html || xdg-open coverage/lcov-report/index.html",
-    "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | eslint --cache --format=node_modules/eslint-formatter-pretty",
     "lint": "eslint --format=node_modules/eslint-formatter-pretty .",
     "fixcode": "eslint --format=node_modules/eslint-formatter-pretty . --fix",
     "git-hook": "yarn -s lint && yarn flow check"
@@ -41,7 +38,8 @@
     "@txo/glow": "^1.2.3",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
-    "babel-jest": "^24.1.0",<% if (props.react) { %>
+    "babel-jest": "^24.1.0",
+    "concurrently": "^5.0.2",<% if (props.react) { %>
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",<% } %>
     "eslint": "^6.3.0",
