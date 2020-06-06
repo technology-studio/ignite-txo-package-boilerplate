@@ -123,7 +123,7 @@ async function install (context) {
     const packageTemplates = [
       { template: 'packages/root-index.js.ejs', target: `${packageRelativePath}/index.js` },
       { template: 'packages/index.js.ejs', target: `${packageRelativePath}/src/index.js` },
-      { template: 'packages/.yarnrc.ejs', target: `${packageRelativePath}/src/.yarnrc` },
+      { template: 'packages/.yarnrc.ejs', target: `${packageRelativePath}/.yarnrc` },
       { template: 'packages/.npmignore.ejs', target: `${packageRelativePath}/.npmignore` },
       { template: 'packages/package.json.ejs', target: `${packageRelativePath}/package.json` },
       { template: 'packages/index.d.ts.ejs', target: `${packageRelativePath}/index.d.ts` },
