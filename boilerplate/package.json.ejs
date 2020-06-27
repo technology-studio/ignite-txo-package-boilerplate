@@ -19,6 +19,9 @@
     "lint": "eslint --format=node_modules/eslint-formatter-pretty .",
     "fixcode": "eslint --format=node_modules/eslint-formatter-pretty . --fix",
     "git-hook": "yarn -s lint && yarn flow check",
+    "flow-typed:install": "scripts/flow-typed-install.sh",
+    "flow-typed:create-stub": "yarn flow-typed create-stub",
+    "print-txo-packages": "npm list 2> /dev/null|grep @txo|sed 's/.*\\(@txo[^ ]*\\).*/\\1/g'|sort|uniq", 
     "sanity": "yarn lint && yarn flow check && yarn test && yarn outdated && echo 'success'"
   },
   "workspaces": [
@@ -56,7 +59,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-standard": "^4.0.1",
-    "flow-bin": "^0.127.0",
+    "flow-bin": "^0.128.0",
     "flow-copy-source": "^2.0.8",
     "flow-typed": "^3.1.0",
     "husky": "^4.2.5",
