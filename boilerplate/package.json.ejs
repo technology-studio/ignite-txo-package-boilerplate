@@ -23,8 +23,8 @@
     "flow-typed:create-stub": "yarn flow-typed create-stub",
     "print-txo-packages": "yarn list 2> /dev/null|grep @txo|sed 's/.*\\(@txo[^@]*\\)@^*\\([^ ]*\\).*/\\1@\\2/g'|sort|uniq",
     "sanity": "yarn lint && yarn flow check && yarn test && yarn outdated && echo 'success'",
-    "wd": "yarn workspace @<%= props.organization %>/<%= props.packageName %>",
-    "wpd": "yarn workspace @<%= props.organization %>/<%= props.packageName %>"
+    "wd": "yarn workspace @txo/<%= props.packageName %>",
+    "wpd": "yarn workspace @txo-peer-dep/<%= props.packageName %>"
   },
   "workspaces": [
     "packages/@txo/*",
