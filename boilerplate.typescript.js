@@ -5,13 +5,13 @@
  * @flow
 **/
 
-export const templates = [
+exports.templates = [
   { template: '.gitignore.ejs', target: '.gitignore' },
   { template: 'package.json.ejs', target: 'package.json' },
   { template: 'README.md.ejs', target: 'README.md' }
 ]
 
-export const getPackageTemplates = (packageRelativePath) => [
+exports.getPackageTemplates = (packageRelativePath) => [
   { template: 'packages/index.ts.ejs', target: `${packageRelativePath}/src/index.ts` },
   { template: 'packages/.yarnrc.ejs', target: `${packageRelativePath}/.yarnrc` },
   { template: 'packages/.npmignore.ejs', target: `${packageRelativePath}/.npmignore` },
