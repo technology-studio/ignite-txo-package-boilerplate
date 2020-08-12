@@ -18,6 +18,12 @@ const questions = [
     name: 'react',
     message: 'Does package use react? (react)',
     type: 'confirm'
+  },
+  {
+    name: 'language',
+    message: 'Which language should be used?',
+    type: 'list',
+    choices: ['typescript', 'es6']
   }
 ]
 
