@@ -94,9 +94,12 @@ async function install (context) {
     ...answers
   }
 
+  const selectedLanguage = answers.language
+  const boilerplatePath = `boilerplate/${answers.language}`
+
   spinner.text = '▸ copying files'
   spinner.start()
-  filesystem.copy(`${__dirname}/boilerplate`, `${process.cwd()}`, {
+  filesystem.copy(`${__dirname}/${boilerplatePath}`, `${process.cwd()}`, {
     overwrite: true,
     matching: '!*.ejs'
   })
@@ -106,34 +109,22 @@ async function install (context) {
   // generate some templates
   spinner.text = '▸ generating files'
   spinner.start()
-  const templates = [
-    { template: '__tests__/Setup.js.ejs', target: '__tests__/Setup.js' },
-    { template: '.gitignore.ejs', target: '.gitignore' },
-    { template: 'package.json.ejs', target: 'package.json' },
-    { template: 'README.md.ejs', target: 'README.md' }
-  ]
+  const templates = require(`./boilerplate.${answers.language}`).templates
 
   await ignite.copyBatch(context, templates, templateProps, {
     quiet: true,
-    directory: `${ignite.ignitePluginPath()}/boilerplate`
+    directory: `${ignite.ignitePluginPath()}/${boilerplatePath}`
   })
 
   const ignitePackage = async(organization) => {
     const packageRelativePath = `packages/@${organization}/${packageName}`
-    const packageTemplates = [
-      { template: 'packages/root-index.js.ejs', target: `${packageRelativePath}/index.js` },
-      { template: 'packages/index.js.ejs', target: `${packageRelativePath}/src/index.js` },
-      { template: 'packages/.yarnrc.ejs', target: `${packageRelativePath}/.yarnrc` },
-      { template: 'packages/.npmignore.ejs', target: `${packageRelativePath}/.npmignore` },
-      { template: 'packages/package.json.ejs', target: `${packageRelativePath}/package.json` },
-      { template: 'packages/index.d.ts.ejs', target: `${packageRelativePath}/index.d.ts` },
-    ]
+    const packageTemplates = require(`./boilerplate.${answers.language}`).getPackageTemplates(packageRelativePath)
     await ignite.copyBatch(context, packageTemplates, {
       ...templateProps,
       organization,
     }, {
       quiet: true,
-      directory: `${ignite.ignitePluginPath()}/boilerplate`
+      directory: `${ignite.ignitePluginPath()}/${boilerplatePath}`
     })
     await system.run(`cd ${packageRelativePath} && ln -s ../../../babel.config.js`)
   }
