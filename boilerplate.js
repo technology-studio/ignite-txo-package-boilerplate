@@ -99,6 +99,10 @@ async function install (context) {
 
   spinner.text = '▸ copying files'
   spinner.start()
+  filesystem.copy(`${__dirname}/boilerplate/common`, `${process.cwd()}`, {
+    overwrite: true,
+    matching: '!*.ejs'
+  })
   filesystem.copy(`${__dirname}/${boilerplatePath}`, `${process.cwd()}`, {
     overwrite: true,
     matching: '!*.ejs'
