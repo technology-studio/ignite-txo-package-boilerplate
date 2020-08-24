@@ -1,0 +1,33 @@
+{
+  "name": "@<%= props.organization %>/<%= props.packageName %>",
+  "version": "0.0.0",
+  "description": "Technology Studio - <%= props.fullname %>",
+  "main": "lib/index.js",
+  "typings": "src/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "<%= props.repository %><%= props.packageName %>.git"
+  },
+  "author": {
+    "name": "Technology Studio",
+    "email": "npm@technologystudio.sk",
+    "url": "<%= props.repository %>"
+  },
+  "license": "<%= props.license %>",
+  "private": false,<% if (props.registry && props.access === 'private') { %>
+  "publishConfig": {
+    "registry": "<%= props.registry %>"
+  },<% } %>
+  "scripts": {
+    "build": "yarn build:clean && yarn build:lib",
+    "build:clean": "yarn rimraf lib",
+    "build:lib": "yarn tsc",
+    "build:watch": "concurrently \"yarn build:watch:lib\"",
+    "build:watch:lib": "yarn tsc --watch",
+    "prepare": "yarn build"
+  },
+  "dependencies": {
+  },
+  "peerDependencies": {
+  }
+}
