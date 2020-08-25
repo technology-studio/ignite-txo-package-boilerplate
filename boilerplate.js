@@ -130,7 +130,9 @@ async function install (context) {
       quiet: true,
       directory: `${ignite.ignitePluginPath()}/${boilerplatePath}`
     })
+    if (selectedLanguage === 'es6') {
     await system.run(`cd ${packageRelativePath} && ln -s ../../../babel.config.js`)
+  }
   }
 
   await ignitePackage('txo')
