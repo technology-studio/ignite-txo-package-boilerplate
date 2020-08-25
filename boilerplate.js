@@ -95,7 +95,7 @@ async function install (context) {
   }
 
   const selectedLanguage = answers.language
-  const boilerplatePath = `boilerplate/${answers.language}`
+  const boilerplatePath = `boilerplate/${selectedLanguage}`
 
   spinner.text = '▸ copying files'
   spinner.start()
@@ -113,7 +113,7 @@ async function install (context) {
   // generate some templates
   spinner.text = '▸ generating files'
   spinner.start()
-  const templates = require(`./boilerplate.${answers.language}`).templates
+  const templates = require(`./boilerplate.${selectedLanguage}`).templates
 
   await ignite.copyBatch(context, templates, templateProps, {
     quiet: true,
@@ -122,7 +122,7 @@ async function install (context) {
 
   const ignitePackage = async(organization) => {
     const packageRelativePath = `packages/@${organization}/${packageName}`
-    const packageTemplates = require(`./boilerplate.${answers.language}`).getPackageTemplates(packageRelativePath)
+    const packageTemplates = require(`./boilerplate.${selectedLanguage}`).getPackageTemplates(packageRelativePath)
     await ignite.copyBatch(context, packageTemplates, {
       ...templateProps,
       organization,
@@ -131,8 +131,8 @@ async function install (context) {
       directory: `${ignite.ignitePluginPath()}/${boilerplatePath}`
     })
     if (selectedLanguage === 'es6') {
-    await system.run(`cd ${packageRelativePath} && ln -s ../../../babel.config.js`)
-  }
+      await system.run(`cd ${packageRelativePath} && ln -s ../../../babel.config.js`)
+    }
   }
 
   await ignitePackage('txo')
