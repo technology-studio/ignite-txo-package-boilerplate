@@ -17,4 +17,5 @@ exports.getPackageTemplates = (packageRelativePath) => [
   { template: 'packages/.yarnrc.ejs', target: `${packageRelativePath}/.yarnrc` },
   { template: 'packages/.npmignore.ejs', target: `${packageRelativePath}/.npmignore` },
   { template: 'packages/package.json.ejs', target: `${packageRelativePath}/package.json` },
+  { template: 'packages/tsconfig.json', target: `${packageRelativePath}/tsconfig.json` },
 ]
