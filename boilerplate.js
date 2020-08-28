@@ -105,7 +105,7 @@ async function install (context) {
   })
   filesystem.copy(`${__dirname}/${boilerplatePath}`, `${process.cwd()}`, {
     overwrite: true,
-    matching: '!*.ejs'
+    matching: '@(!*.ejs|!packages/*)'
   })
   spinner.stop()
   spinner.succeed(`files copied`)
@@ -129,6 +129,10 @@ async function install (context) {
     }, {
       quiet: true,
       directory: `${ignite.ignitePluginPath()}/${boilerplatePath}`
+    })
+    filesystem.copy(`${__dirname}/${boilerplatePath}/packages`, `${process.cwd()}/${packageRelativePath}`, {
+      overwrite: true,
+      matching: '!*.ejs'
     })
     if (selectedLanguage === 'es6') {
       await system.run(`cd ${packageRelativePath} && ln -s ../../../babel.config.js`)
