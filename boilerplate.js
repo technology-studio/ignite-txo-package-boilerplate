@@ -120,6 +120,13 @@ async function install (context) {
     directory: `${ignite.ignitePluginPath()}/${boilerplatePath}`
   })
 
+  const copyNestedFolders = (sourcePath, outputPath) => {
+    filesystem.copy(sourcePath, `${process.cwd()}/${outputPath}`, {
+      overwrite: true,
+      matching: '!*.ejs'
+    })
+  }
+
   const ignitePackage = async(organization) => {
     const packageRelativePath = `packages/@${organization}/${packageName}`
     const packageTemplates = require(`./boilerplate.${selectedLanguage}`).getPackageTemplates(packageRelativePath)
@@ -130,10 +137,22 @@ async function install (context) {
       quiet: true,
       directory: `${ignite.ignitePluginPath()}/${boilerplatePath}`
     })
-    filesystem.copy(`${__dirname}/${boilerplatePath}/packages`, `${process.cwd()}/${packageRelativePath}`, {
-      overwrite: true,
-      matching: '!*.ejs'
+
+    const nestedPaths = [
+      {
+        src: `${__dirname}/${boilerplatePath}/packages`,
+        out: `${packageRelativePath}`,
+      },
+      {
+        src: `${__dirname}/${boilerplatePath}/__tests__`,
+        out: `__tests__`
+      }
+    ]
+    nestedPaths.forEach(path => {
+      copyNestedFolders(path.src, path.out)
     })
+
+    
     if (selectedLanguage === 'es6') {
       await system.run(`cd ${packageRelativePath} && ln -s ../../../babel.config.js`)
     }
