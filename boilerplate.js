@@ -105,7 +105,7 @@ async function install (context) {
   })
   filesystem.copy(`${__dirname}/${boilerplatePath}`, `${process.cwd()}`, {
     overwrite: true,
-    matching: '@(!*.ejs|!packages/*)'
+    matching: ['!*.ejs', '!packages/*']
   })
   spinner.stop()
   spinner.succeed(`files copied`)
