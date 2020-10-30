@@ -1,6 +1,6 @@
 {
   "name": "ignite-txo-package-boilerplate",
-  "version": "4.10.0",
+  "version": "4.11.0",
   "description": "Technology Studio's boilerplate for public node packages",
   "repository": {
     "type": "git",
