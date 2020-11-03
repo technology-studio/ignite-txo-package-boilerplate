@@ -36,7 +36,10 @@
   "dependencies": {},
   "devDependencies": {
     "@txo-peer-dep/log": "^3.0.0",
-    "@txo/log-console": "^2.0.0",
+    "@txo/log-console": "^2.0.0",<% if (props.react) { %>
+    "@types/react": "^16.9.0"
+    "@types/enzyme": "^3.10.8",
+    "@types/enzyme-adapter-react-16": "^1.0.6",<% } %>
     "@types/jest": "^26.0.9",
     "@typescript-eslint/eslint-plugin": "^4.4.1",
     "@typescript-eslint/parser": "^4.4.1",
