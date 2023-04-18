@@ -89,7 +89,7 @@ async function install (context) {
   const templateProps = {
     fullname,
     packageName,
-    license: answers.access === 'public' ? 'MIT': 'UNLICENSED',
+    license: 'UNLICENSED',
     registry,
     ...answers
   }
