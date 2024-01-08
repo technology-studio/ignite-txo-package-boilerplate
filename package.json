@@ -12,7 +12,7 @@
     "email": "contact@technologystudio.sk",
     "url": "https://github.com/technology-studio"
   },
-  "license": "MIT",
+  "license": "UNLICENSED",
   "private": false,
   "scripts": {
     "lint": "standard",
